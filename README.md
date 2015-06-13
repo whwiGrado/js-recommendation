@@ -68,7 +68,7 @@
 * 数据类型的检测
 
 ```
-    function typeOf(o){
+    function typeOf(o) {
         var _toString = Object.prototype.toString;
         var _type = {
             "undefined" : "undefined",
@@ -89,7 +89,13 @@
 * 避免误用 parseInt
 
 ```
-parseInt(string, radix);
+    parseInt(string, radix); 建议指定第二个参数
+    Bug:
+        parseInt("010"); // 8(默认八进制)
+        parseInt("0x10"); // 16(默认十六进制)
+    fix:
+        parseInt("010", 10); //10
+        parseInt("0x10", 10); //0(从字符串的第0个位置开始检查是否是数字，检测到非数字，则输出前面的数字)
 ```
 
 *
