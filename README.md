@@ -8,7 +8,6 @@
 * 能非常熟悉某个开源产品
 * 能提升客户端应用性能
 
-***
 
 ## 目录
 1. JavaScript 语言基础（33个建议）
@@ -21,7 +20,6 @@
 8.
 9.
 
-***
 
 ### 第一章
 * 减少全局变量污染
@@ -60,44 +58,40 @@
     | 0 | "0"  | 不转换 | false | Number |
     | true | "true"  | 1 | 不转换 | Boolean |
     | false | "false"  | 0 | 不转换 | Boolean |
-    | 空对象 | toString() | NaN | true | 不转换 |
-    | 非空对象 | toString() | 转数字/NaN | true | 不转换 |
-    | 空数组 | toString() | 0 | true | 不转换 |
-    | 非空数组 | toString() | 转数字(只有一个数字元素)/NaN | true | 不转换 |
+    | 空对象 | 对象的toString() | NaN | true | 不转换 |
+    | 非空对象 | 对象的toString() | 转数字/NaN | true | 不转换 |
+    | 空数组 | 数组的toString() | 0 | true | 不转换 |
+    | 非空数组 | 数组的toString() | 转数字(只有一个数字元素)/NaN | true | 不转换 |
 
-*
+    ![alt text](/images/toString.png)
 
-```
-
-```
-*
+* 数据类型的检测
 
 ```
-```
-*
+    function typeOf(o){
+        var _toString = Object.prototype.toString;
+        var _type = {
+            "undefined" : "undefined",
+            "number" : "number",
+            "boolean" : "boolean",
+            "string" : "string",
+            "[object Function]" : "function",
+            "[object Array]" : "array",
+            "[object Date]" : "date",
+            "[object RegExp]" : "regexp",
+            "[object Error]" : "error"
+        }
+        return _type[typeof o] || _type[_toString.call(o)] || (o ? "object" : "null");
+    }
 
 ```
-```
-*
+
+* 避免误用 parseInt
 
 ```
+parseInt(string, radix);
 ```
-*
 
-```
-```
-*
-
-```
-```
-*
-
-```
-```
-*
-
-```
-```
 *
 
 ```
@@ -106,4 +100,7 @@
 
 ```
 ```
+*
 
+```
+```
