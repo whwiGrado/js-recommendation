@@ -90,22 +90,57 @@
 
 ```
     parseInt(string, radix); 建议指定第二个参数
-    Bug:
+    not recommended:
         parseInt("010"); // 8(默认八进制)
         parseInt("0x10"); // 16(默认十六进制)
-    fix:
+    recommended:
         parseInt("010", 10); //10
         parseInt("0x10", 10); //0(从字符串的第0个位置开始检查是否是数字，检测到非数字，则输出前面的数字)
 ```
 
+* 防止 JavaScript 自动插入分号
+
+```
+    分行书写的代码应该确保单行不形成独立的合法的逻辑语义
+    error:
+        var i = a ? 1 : b
+                  ? 2 : c
+                  ? 3 : 4;
+    correct:
+        var i = a ? 1
+              : b ? 2
+              : c ? 3
+              : 4;
+```
+
+* 区分 number 与 NaN 、+Infinity/-Infinity
+
+```
+    Bug:
+        typeof 不能区分普通数字与 NaN、+Infinity/-Infinity
+    fix:
+        function isNumber(value) {
+            if(typeof value === "number"){
+                return isNaN(value) ? "NaN"
+                  : isFinite(value) ? "number"
+                  : "+Infinity/-Infinity";
+            }else{
+                return "NaN";
+            }
+        }
+
+```
+
 *
 
 ```
 ```
+
 *
 
 ```
 ```
+
 *
 
 ```
