@@ -214,8 +214,9 @@
 ```
     with 语句阻止了变量名的词法作用于绑定，不利于代码维护
     e.g.:
-    ![alt text](/images/with.png)
 ```
+    ![alt text](/images/with.png)
+
 
 *
 
