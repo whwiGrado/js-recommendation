@@ -131,14 +131,53 @@
 
 ```
 
-*
+* undefined
 
 ```
+    undefined 会出现的3种情况
+        1. 从一个对象及其原型链中查找某个属性未找到时返回 undefined
+        2. 将没有显式的通过 return 语句返回值的函数赋值给某个变量(构造函数用 new 实例化时除外)时，返回 undefined
+        3. 函数声明的形参个数 > 调用时传入的参数个数，多余的形参将被设置为 undefined
+    对于浏览器不支持 undefined 关键字时，需要自定义 undefined，方式有:
+        1. var undefined = void null;
+        2. var undefined = void 1;
+        3. var undefined = function(){};
 ```
 
-*
+* 使用假值
 
 ```
+    下面的6个值的布尔值都是 false
+    0             // Number
+    NaN           // Number
+    ""            // String
+    null          // Object
+    undefined     // Undefined
+    false         // false
+```
+
+* == 与 ===
+
+```
+    建议使用 === 和 !== ，而尽量避免使用 ==
+    === 的算法规则，e.g.: 判断 x === y
+        x 与 y 的数据类型不同 ? false
+        : x 的数据类型为 Null 或 Undefined ? true
+        : x 的数据类型为 Number ?
+            if( x 是 NaN || y 是 NaN ) : false
+            else if( x、y 其中一个是+0，另个一个是-0 ) : true
+            else if( x、y 的数值相等) : true
+            else : false
+        : x 的数据类型是 String ?
+            if( x、y 的字符序列完全相等 ) : true
+            else : false
+        : x 的数据类型是 Boolean ?
+            if( x、y 同 ture 或同 false ) : true
+            else : false
+        : x 的数据类型是 Object ?
+            if( x、y 引用相同的对象 ) : true
+            else : false
+
 ```
 
 *
