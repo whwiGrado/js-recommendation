@@ -134,11 +134,11 @@
 * undefined
 
 ```
-    undefined 会出现的3种情况
+    * undefined 会出现的3种情况
         1. 从一个对象及其原型链中查找某个属性未找到时返回 undefined
         2. 将没有显式的通过 return 语句返回值的函数赋值给某个变量(构造函数用 new 实例化时除外)时，返回 undefined
         3. 函数声明的形参个数 > 调用时传入的参数个数，多余的形参将被设置为 undefined
-    对于浏览器不支持 undefined 关键字时，需要自定义 undefined，方式有:
+    * 对于浏览器不支持 undefined 关键字时，需要自定义 undefined，方式有:
         1. var undefined = void null;
         2. var undefined = void 1;
         3. var undefined = function(){};
@@ -148,19 +148,19 @@
 
 ```
     下面的6个值的布尔值都是 false
-    0             // Number
-    NaN           // Number
-    ""            // String
-    null          // Object
-    undefined     // Undefined
-    false         // false
+        0             // Number
+        NaN           // Number
+        ""            // String
+        null          // Object
+        undefined     // Undefined
+        false         // false
 ```
 
 * == 与 ===
 
 ```
-    建议使用 === 和 !== ，而尽量避免使用 ==
-    === 的算法规则，e.g.: 判断 x === y
+    * 建议使用 === 和 !== ，而尽量避免使用 ==
+    * === 的算法规则，e.g.: 判断 x === y
         x 与 y 的数据类型不同 ? false
         : x 的数据类型为 Null 或 Undefined ? true
         : x 的数据类型为 Number ?
@@ -178,6 +178,43 @@
             if( x、y 引用相同的对象 ) : true
             else : false
 
+```
+
+* 使用真正的空对象
+
+```
+    * 空对象的创建
+        var o;
+        创建一个普通的空对象
+            o = {} or o = new Object();
+            // is equivalent to:
+            o = Object.create(Object.prototype);
+        创建一个不继承 Ojbect.prototype 的空对象
+            o = Object.create(null);
+
+    * 不继承原型链的空对象的用途
+        e.g.: 统计一段文本中每个单词的出现次数:
+            function countWord(text){
+                var words = text.toLowerCase().split(/[\s,.]+/);
+                // 如果 text 中含有原型链中的属性或方法名的单词也不会影响统计结果
+                var count = Object.create(null);
+                for( var i = 0 ; i < words.length; i += 1) {
+                    word = words[i];
+                    if(count[word] && typeof count[word] === 'number') {
+                        count[word] += 1;
+                    }else {
+                        count[word] = 1;
+                    }
+                }
+            }
+```
+
+* 避免使用 with 语句
+
+```
+    with 语句阻止了变量名的词法作用于绑定，不利于代码维护
+    e.g.:
+    ![alt text](/images/with.png)
 ```
 
 *
