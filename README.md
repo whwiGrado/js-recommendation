@@ -246,3 +246,26 @@
         * "use strict" 模式下不会为 arguments 和 形参 创建 getter 和 setter 方法，即两者相对独立
 ```
 
+* 防止 switch 贯穿
+
+```
+    Bug:
+        var foo = 0;
+        switch (foo) {
+          case 0: // 由于 case 0 中没有终止语句，所以会继续走到 case 1 中
+            console.log(0)
+          case 1:
+            console.log(1);
+            break; // 终止 switch 的贯穿
+          default:
+            console.log('default');
+        }
+    fix:
+        为每一个 case 添加终止语句
+```
+
+*
+
+```
+```
+
