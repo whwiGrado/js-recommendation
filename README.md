@@ -213,13 +213,36 @@
 
 ```
     with 语句阻止了变量名的词法作用于绑定，不利于代码维护
-    e.g.:
+    e.g.: 下图中的代码与执行结果
 ```
 
 ![alt text](/images/with.png)
 
-
-*
+* 改变表达式的结构顺序
 
 ```
+    not recommended:
+        if( age >= 6 && age < 18 || age >= 65 ){}
+    recommended:
+        if( (6 <= age && age < 18) || 65 <= age ){}
 ```
+
+* 避免使用 eval 语句
+
+```
+    不要显式使用 eval 的原因有： 1、性能不好 2、不安全 3、产生混乱的代码逻辑
+    也不要隐式的使用 eval：
+        e.g.:
+        * setTimeout 和 setInterval 函数使用字符串作为第一个参数时(not recommended)
+        * new Function(func) 使用函数构造器时(not recommended)
+```
+
+* 防止误用类数组
+
+```
+    arguments 对象就是一个类数组
+        * 将其转换为真正数组的方法：var args = [].slice.call(arguments, 0);
+        * 使用 arguments.callee 会严重影响 Javascript 的性能
+        * "use strict" 模式下不会为 arguments 和 形参 创建 getter 和 setter 方法，即两者相对独立
+```
+
